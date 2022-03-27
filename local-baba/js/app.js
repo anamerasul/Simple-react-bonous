@@ -10,7 +10,7 @@
 // jayed:4
 // }
 
-const db = {};
+let db = {};
 
 const addToDb = item => {
     //3 way to add a object 
@@ -18,6 +18,14 @@ const addToDb = item => {
 
 
     // db['alam']=1;
+
+    const storedTracker = localStorage.getItem('cheka-tracker')
+
+    if (storedTracker) {
+
+        db = JSON.parse(storedTracker)
+
+    }
 
     if (item in db) {
         db[item] = db[item] + 1
@@ -31,12 +39,16 @@ const addToDb = item => {
     console.log(db)
 }
 
-addToDb('manna')
+// addToDb('manna')
 addToDb('bappa')
 addToDb('bappa')
 addToDb('bappa')
 addToDb('bappa')
 addToDb('jasim')
+addToDb('jasim')
+addToDb('jasim')
+addToDb('mahi')
+addToDb('manna')
 
 localStorage.setItem('fruit', 'mango')
 localStorage.setItem('age', 15)
@@ -49,4 +61,17 @@ localStorage.getItem('age')
 console.log(typeof localStorage.getItem('age'))
 console.log(localStorage.getItem('cheka-tracker'))
 console.log(localStorage.getItem('cheka-tracker')['jasim'])
-console.log(JSON.parse(localStorage.getItem('cheka-tracker'))['jasim'])
+console.log(JSON.parse(localStorage.getItem('cheka-tracker'))['mahi'])
+
+const removeItem = item => {
+
+    const storedTracker = localStorage.getItem('cheka-tracker')
+    if (storedTracker) {
+        const storeObj = JSON.parse(storedTracker)
+        delete storeObj[item];
+        localStorage.setItem('cheka-tracker', JSON.stringify(storeObj))
+    }
+
+}
+
+removeItem('manna')
